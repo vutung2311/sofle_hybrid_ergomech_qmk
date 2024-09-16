@@ -32,7 +32,7 @@
             {
                 "pin_a": "F5",
                 "pin_b": "F4",
-                "resolution": 2
+                "resolution": 4
             }
         ]
     },
@@ -44,7 +44,7 @@
                     {
                         "pin_a": "F4",
                         "pin_b": "F5",
-                        "resolution": 2
+                        "resolution": 4
                     }
                 ]
             }
