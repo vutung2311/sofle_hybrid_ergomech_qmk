@@ -21,7 +21,7 @@
 #include QMK_KEYBOARD_H
 #include "oled.c"
 
-// Default keymap. This can be changed in Vial. Use oled.c to change beavior that Vial cannot change.
+// Default keymap. This can be changed in Vial. Use oled.c to change behavior that Vial cannot change.
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
@@ -46,7 +46,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN,  KC_ENT,
   KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B,                     KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT,
             KC_MUTE ,KC_LGUI,KC_LALT,KC_LCTL, MO(2), KC_SPC,    KC_SPC,  MO(3), KC_RCTL, KC_RALT, KC_RGUI,
-                                                              KC_ENTER, KC_RIGHT, KC_UP, KC_LEFT, KC_DOWN
+                                                              KC_UP, KC_LEFT, KC_ENTER, KC_RIGHT, KC_DOWN
 ),
 /*
  * COLEMAK
@@ -70,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,   KC_A,   KC_R,    KC_S,    KC_T,    KC_D,                      KC_H,    KC_N,    KC_E,    KC_I,    KC_O,  KC_ENT,
   KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B,                      KC_K,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT,
             KC_MUTE ,KC_LGUI,KC_LALT,KC_LCTL, MO(2), KC_SPC,     KC_SPC,  MO(3), KC_RCTL, KC_RALT, KC_RGUI,
-                                                              KC_ENTER, KC_RIGHT, KC_UP, KC_LEFT, KC_DOWN
+                                                              KC_UP, KC_LEFT, KC_ENTER, KC_RIGHT, KC_DOWN
 ),
 /* LOWER
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -92,7 +92,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_CAPS, KC_EXLM, KC_LEFT, KC_DOWN, KC_RIGHT,KC_PERC,            KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_QUOT,
   _______,  KC_EQL, KC_MINS, KC_PLUS, KC_LCBR, KC_RCBR,            KC_LBRC, KC_RBRC, KC_SCLN, KC_COLN, KC_BSLS, _______,
   KC_MUTE,_______, _______, _______, _______, _______,       _______, _______, _______, _______, _______,
-                                                              KC_ENTER, KC_RIGHT, KC_UP, KC_LEFT, KC_DOWN
+                                                              KC_UP, KC_LEFT, KC_ENTER, KC_RIGHT, KC_DOWN
 ),
 /* RAISE
  * ,----------------------------------------.                    ,-------------------------------------------.
@@ -109,18 +109,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            `----------------------------------'           '------''---------------------------'
  */
 [3] = LAYOUT(
-  _______, _______ , _______ , _______ , _______ , _______,                           _______,  _______  , _______,  _______ ,  _______ ,_______,
-  _______,  KC_INS,  KC_PSCR,   KC_APP,  XXXXXXX, XXXXXXX,                        KC_PGUP, _______,   KC_UP, _______,_______, KC_BSPC,
-  _______, KC_LALT,  KC_LCTL,  KC_LSFT,  XXXXXXX, XXXXXXX,                       KC_PGDN,  KC_LEFT, KC_DOWN, KC_RGHT,  KC_DEL, KC_QUOT,
-  _______,KC_UNDO, KC_CUT, KC_COPY, KC_PASTE, XXXXXXX,                           XXXXXXX, _______, KC_HOME, KC_END,   XXXXXXX, _______,
-                         KC_MUTE,_______, _______, _______, _______, _______,       _______, _______, _______, _______, _______,
-                                                              KC_ENTER, KC_RIGHT, KC_UP, KC_LEFT, KC_DOWN
+  _______, _______, _______ , _______ , _______ , _______,                       _______,  _______, _______,_______ ,  _______,_______,
+  _______,  KC_INS,  KC_PSCR,   KC_APP,  XXXXXXX, XXXXXXX,                       KC_PGUP,  _______,   KC_UP, _______,  _______, KC_BSPC,
+  _______, KC_LALT,  KC_LCTL,  KC_LSFT,  XXXXXXX, XXXXXXX,                       KC_PGDN,  KC_LEFT, KC_DOWN, KC_RGHT,   KC_DEL, KC_QUOT,
+  _______, KC_UNDO,   KC_CUT,  KC_COPY, KC_PASTE, XXXXXXX,                       XXXXXXX,  _______, KC_HOME,  KC_END,   XXXXXXX,_______,
+           KC_MUTE,  _______,  _______,  _______, _______, _______,       _______, _______, _______, _______, _______,
+                                                              KC_UP, KC_LEFT, KC_ENTER, KC_RIGHT, KC_DOWN
 )
 };
 
+#if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
-    [0] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
-    [1] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
-    [2] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
-    [3] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [0] = { ENCODER_CCW_CW(KC_VOLU, KC_VOLD), ENCODER_CCW_CW(KC_VOLU, KC_VOLD) },
+    [1] = { ENCODER_CCW_CW(KC_VOLU, KC_VOLD), ENCODER_CCW_CW(KC_VOLU, KC_VOLD) },
+    [2] = { ENCODER_CCW_CW(KC_VOLU, KC_VOLD), ENCODER_CCW_CW(KC_VOLU, KC_VOLD) },
+    [3] = { ENCODER_CCW_CW(KC_VOLU, KC_VOLD), ENCODER_CCW_CW(KC_VOLU, KC_VOLD) },
 };
+#endif

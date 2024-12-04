@@ -1,4 +1,5 @@
 ENCODER_ENABLE = yes
+ENCODER_MAP_ENABLE = yes
 OLED_ENABLE = yes
 BOOTMAGIC_ENABLE = yes       # Enable Bootmagic Lite
 MOUSEKEY_ENABLE = yes       # Mouse keys
