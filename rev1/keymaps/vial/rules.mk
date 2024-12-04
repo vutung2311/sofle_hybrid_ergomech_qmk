@@ -12,4 +12,4 @@ MOUSEKEY_ENABLE = yes
 COMBO_ENABLE = no
 KEY_OVERRIDE_ENABLE = no
 CONVERT_TO = promicro_rp2040
-DEBOUNCE_TYPE = sym_defer_pr
+DEBOUNCE_TYPE = sym_eager_pk
