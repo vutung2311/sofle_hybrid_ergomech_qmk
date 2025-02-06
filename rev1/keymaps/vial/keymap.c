@@ -76,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+-------|
  * | Esc  | Ins  | Pscr | Menu |      |      |                    | PgUp | Home |  Up  | End  |      | F12   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+-------|
- * | Tab  | LAt  | LCtl |LShift|      |      |-------.    ,-------|PgDown| Left | Down | Right|  Del | Enter |
+ * | Tab  |      |      |      |      |      |-------.    ,-------|PgDown| Left | Down | Right|  Del | Enter |
  * |------+------+------+------+------+------|  MUTE  |    |      |------+------+------+------+------+-------|
  * |Shift | Undo |  Cut | Copy | Paste|      |-------|    |-------| Del  |      |      |      |   \  | Shift |
  * `-----------------------------------------/       /     \      \------------------------------------------'
@@ -87,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [2] = LAYOUT(
   XXXXXXX,   KC_F1,    KC_F2,    KC_F3,    KC_F4,   KC_F5,                     KC_F6,    KC_F7,   KC_F8,   KC_F9,    KC_F10,  KC_F11,
   _______,  KC_INS,  KC_PSCR,   KC_APP,  XXXXXXX, XXXXXXX,                   KC_PGUP,  KC_HOME,  KC_UP,   KC_END,   XXXXXXX,  KC_F12,
-  _______, KC_LALT,  KC_LCTL,  KC_LSFT,  XXXXXXX, XXXXXXX,                   KC_PGDN,  KC_LEFT, KC_DOWN, KC_RGHT,   XXXXXXX,  KC_ENT,
+  _______, XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,                   KC_PGDN,  KC_LEFT, KC_DOWN, KC_RGHT,   XXXXXXX, XXXXXXX,
   _______, KC_UNDO,   KC_CUT,  KC_COPY, KC_PASTE, XXXXXXX,                    KC_DEL,  XXXXXXX, XXXXXXX,  XXXXXXX,  KC_SLSH, _______,
            KC_MUTE,  _______,  _______,  _______, _______, _______,       _______, _______, _______, _______, _______,
                                                                     KC_UP, KC_LEFT, KC_ENTER, KC_RIGHT, KC_DOWN
