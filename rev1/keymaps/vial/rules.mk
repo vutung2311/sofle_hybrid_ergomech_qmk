@@ -8,10 +8,10 @@ VIAL_ENABLE = yes
 ENCODER_MAP_ENABLE = yes
 RGBLIGHT_ENABLE = no
 QMK_SETTINGS = no
-MOUSEKEY_ENABLE = yes
+MOUSEKEY_ENABLE = no
 COMBO_ENABLE = no
 KEY_OVERRIDE_ENABLE = no
 CONVERT_TO = promicro_rp2040
-DEBOUNCE_TYPE = sym_eager_pk
+DEBOUNCE_TYPE = sym_defer_pk
 
 EXTRAFLAGS += -flto=auto -fuse-linker-plugin -ffat-lto-objects
