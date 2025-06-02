@@ -24,7 +24,7 @@
 #define VIAL_KEYBOARD_UID { 0x05, 0xCD, 0x9F, 0x8A, 0xF4, 0xDF, 0xDE, 0xB2 }
 
 // The four corners
-#define VIAL_UNLOCK_COMBO_ROWS { 0, 5, 3, 8 }
+#define VIAL_UNLOCK_COMBO_ROWS { 0, 6, 3, 9 }
 #define VIAL_UNLOCK_COMBO_COLS { 0, 0, 0, 0 }
 
 #define USB_POLLING_INTERVAL_MS 1

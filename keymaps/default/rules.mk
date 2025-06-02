@@ -5,13 +5,14 @@ EXTRAKEY_ENABLE = yes
 NKRO_ENABLE = yes
 VIA_ENABLE = yes
 VIAL_ENABLE = yes
+# VIAL_INSECURE = yes
 ENCODER_MAP_ENABLE = yes
 RGBLIGHT_ENABLE = no
-QMK_SETTINGS = no
+QMK_SETTINGS = yes
 MOUSEKEY_ENABLE = no
 COMBO_ENABLE = no
 KEY_OVERRIDE_ENABLE = no
-CONVERT_TO = promicro_rp2040
 DEBOUNCE_TYPE = sym_defer_pk
-
+LTO_ENABLE = yes
+CONVERT_TO = rp2040_ce
 EXTRAFLAGS += -flto=auto -fuse-linker-plugin -ffat-lto-objects

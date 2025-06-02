@@ -3,31 +3,22 @@
     "manufacturer": "Ergomech Store",
     "url": "https://github.com/vutung2311/sofle_hybrid_ergomech_qmk",
     "maintainer": "Ergomech Store <admin@ergomech.store>",
+    "development_board": "promicro",
+    "build": {
+        "lto": true
+    },
     "usb": {
         "vid": "0xFC32",
         "pid": "0x0287",
         "device_version": "0.0.1"
     },
     "matrix_pins": {
-        "cols": [
-            "F6",
-            "F7",
-            "B1",
-            "B3",
-            "B2",
-            "B6"
-        ],
-        "rows": [
-            "C6",
-            "D7",
-            "E6",
-            "B4",
-            "B5",
-            "D4"
-        ]
+        "cols": ["F6", "F7", "B1", "B3", "B2", "B6"],
+        "rows": ["C6", "D7", "E6", "B4", "B5", "D4"]
     },
     "diode_direction": "COL2ROW",
     "encoder": {
+        "enabled": true,
         "rotary": [
             {
                 "pin_a": "F5",
@@ -37,7 +28,10 @@
         ]
     },
     "split": {
-        "soft_serial_pin": "D2",
+        "enabled": true,
+        "serial": {
+            "pin": "D2"
+        },
         "encoder": {
             "right": {
                 "rotary": [
@@ -56,8 +50,6 @@
     "qmk": {
         "tap_keycode_delay": 10
     },
-    "processor": "atmega32u4",
-    "bootloader": "caterina",
     "layouts": {
         "LAYOUT": {
             "layout": [
@@ -358,22 +350,22 @@
                     "y": 4
                 },
                 {
-                    "matrix": [11,3],
+                    "matrix": [11,5],
                     "x": 8,
                     "y": 5.5
                 },
                 {
-                    "matrix": [11,2],
+                    "matrix": [11,4],
                     "x": 7,
                     "y": 6.5
                 },
                 {
-                    "matrix": [11,5],
+                    "matrix": [11,3],
                     "x": 8,
                     "y": 6.5
                 },
                 {
-                    "matrix": [11,4],
+                    "matrix": [11,2],
                     "x": 9,
                     "y": 6.5
                 },
