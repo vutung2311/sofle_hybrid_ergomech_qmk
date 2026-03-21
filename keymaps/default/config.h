@@ -37,5 +37,14 @@
 #define SPLIT_OLED_ENABLE
 #define FORCE_NKRO
 
+/* RP2040 GPIO settles much faster than AVR — reduce from default 30µs */
+#define MATRIX_IO_DELAY 10
+
+/* Lower debounce for snappier key registration (default 5ms) */
+#define DEBOUNCE 3
+
+/* OLED content (layer/caps) changes infrequently — reduce split traffic */
+#define OLED_UPDATE_INTERVAL 100
+
 /* Run OLED on RP2040 Core 1 (SMP) — frees Core 0 scan loop from I2C */
 #define RP2040_SMP_OLED_CORE1

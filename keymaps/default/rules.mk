@@ -13,6 +13,7 @@ MOUSEKEY_ENABLE = no
 COMBO_ENABLE = no
 KEY_OVERRIDE_ENABLE = no
 DEBOUNCE_TYPE = sym_defer_pk
+SERIAL_DRIVER = vendor
 LTO_ENABLE = yes
 CONVERT_TO = rp2040_ce
 EXTRAFLAGS += -flto=auto -fuse-linker-plugin -ffat-lto-objects
