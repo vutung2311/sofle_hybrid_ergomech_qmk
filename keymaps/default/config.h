@@ -36,3 +36,6 @@
 #define SPLIT_LAYER_STATE_ENABLE
 #define SPLIT_OLED_ENABLE
 #define FORCE_NKRO
+
+/* Run OLED on RP2040 Core 1 (SMP) — frees Core 0 scan loop from I2C */
+#define RP2040_SMP_OLED_CORE1
