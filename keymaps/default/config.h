@@ -46,5 +46,13 @@
 /* OLED content (layer/caps) changes infrequently — reduce split traffic */
 #define OLED_UPDATE_INTERVAL 100
 
+/* 70% brightness (178/255) to slow OLED pixel degradation */
+#define OLED_BRIGHTNESS 178
+
+/* We control oled_on/oled_off based on layer state — prevent the
+ * driver from auto-turning on the display in oled_render_dirty(). */
+#define OLED_MANUAL_POWER
+#define OLED_TIMEOUT 0
+
 /* Run OLED on RP2040 Core 1 (SMP) — frees Core 0 scan loop from I2C */
 #define RP2040_SMP_OLED_CORE1

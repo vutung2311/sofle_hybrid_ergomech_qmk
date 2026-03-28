@@ -48,10 +48,10 @@ static void print_status_narrow(void) {
     oled_write_ln_P(PSTR("LAYER"), false);
     switch (get_highest_layer(layer_state)) {
         case 1:
-            oled_write_P(PSTR("Lower"), false);
+            oled_write_ln_P(PSTR("Lower"), false);
             break;
         case 2:
-            oled_write_P(PSTR("Raise"), false);
+            oled_write_ln_P(PSTR("Raise"), false);
             break;
         default:
             oled_write_ln_P(PSTR("Undef"), false);
@@ -68,13 +68,98 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     return rotation;
 }
 
+/* Brief boot splash: show the display for OLED_BOOT_SPLASH_MS after power-on
+ * so the user can confirm the keyboard booted, then revert to normal
+ * burn-in-prevention mode (off on default layer). */
+#ifndef OLED_BOOT_SPLASH_MS
+#    define OLED_BOOT_SPLASH_MS 3000   /* 3 seconds */
+#endif
+
+/* Anti-burn-in: toggle between normal and inverted display every
+ * OLED_INVERT_INTERVAL ms so all pixels age equally (~50/50 duty). */
+#ifndef OLED_INVERT_INTERVAL
+#    define OLED_INVERT_INTERVAL 1000   /* 1 second */
+#endif
+
+static bool     oled_inverted_state  = false;
+static uint32_t oled_invert_timer    = 0;
+static uint32_t oled_boot_timer      = 0;
+static bool     oled_boot_timer_init = false;
+static bool     oled_splash_ended    = false;
+
+/* The driver's rotation state — we temporarily override it during splash so
+ * the landscape logo renders correctly on the master (normally ROTATION_270). */
+extern oled_rotation_t oled_rotation;
+extern uint8_t         oled_rotation_width;
+
+static void set_oled_rotation(oled_rotation_t rot) {
+    oled_rotation = rot;
+    if (rot == OLED_ROTATION_0 || rot == OLED_ROTATION_180) {
+        oled_rotation_width = OLED_DISPLAY_WIDTH;
+    } else {
+        oled_rotation_width = OLED_DISPLAY_HEIGHT;
+    }
+}
+
 bool oled_task_user(void) {
+    /* Lazy-init the boot timer on first call (timer_read32() is 0 at
+     * static-init time on some platforms). */
+    if (!oled_boot_timer_init) {
+        oled_boot_timer      = timer_read32();
+        oled_boot_timer_init = true;
+        /* Force master into landscape for the splash logo. */
+        if (is_keyboard_master()) {
+            set_oled_rotation(OLED_ROTATION_0);
+        }
+    }
+
+    bool     in_splash = timer_elapsed32(oled_boot_timer) < OLED_BOOT_SPLASH_MS;
+    uint8_t  layer     = get_highest_layer(layer_state);
+
+    /* Transition: splash just ended on master — restore the narrow rotation
+     * and clear the buffer so the old landscape content doesn't linger. */
+    if (!in_splash && !oled_splash_ended && is_keyboard_master()) {
+        oled_splash_ended = true;
+        set_oled_rotation(OLED_ROTATION_270);
+        oled_clear();
+    }
+
     if (is_keyboard_master()) {
+        /* Master decides OLED power based on layer state.
+         * OLED_MANUAL_POWER prevents the driver from auto-turning on
+         * the display; SPLIT_OLED_ENABLE syncs this to the slave. */
+        if (layer == 0 && !in_splash) {
+            oled_off();
+            return false;
+        }
+        oled_on();
+    } else {
+        /* Slave: SPLIT_OLED_ENABLE syncs the master's oled_on/oled_off
+         * state via the split transport.  Do NOT call oled_on()/oled_off()
+         * here — that would race with the synced state and keep the
+         * slave display on after the master turned it off. */
+        if (!is_oled_on()) {
+            return false;
+        }
+    }
+
+    if (in_splash) {
+        /* During boot splash, show logo on both halves. */
+        render_logo();
+    } else if (is_keyboard_master()) {
         print_status_narrow();
     } else {
         render_logo();
     }
-	return false;
+
+    /* Periodically flip the display polarity to equalise pixel wear. */
+    if (timer_elapsed32(oled_invert_timer) >= OLED_INVERT_INTERVAL) {
+        oled_invert_timer   = timer_read32();
+        oled_inverted_state = !oled_inverted_state;
+        oled_invert(oled_inverted_state);
+    }
+
+    return false;
 }
 
 #endif
