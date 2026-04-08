@@ -43,6 +43,13 @@
 /* Lower debounce for snappier key registration (default 5ms) */
 #define DEBOUNCE 3
 
+/* Detent-position-based encoder triggering: fire exactly one event when
+ * the roller settles into its resting state (both pins HIGH via pull-ups
+ * = 0b11).  This makes pulse counting robust against contact bounce and
+ * variable transition counts — the LUT's +1/−1 oscillations cancel, and
+ * only the net direction matters when the detent is reached. */
+#define ENCODER_DEFAULT_POS 0b11
+
 /* OLED content (layer/caps) changes infrequently — reduce split traffic */
 #define OLED_UPDATE_INTERVAL 100
 
