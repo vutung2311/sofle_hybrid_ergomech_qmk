@@ -41,7 +41,7 @@
 #define MATRIX_IO_DELAY 10
 
 /* Lower debounce for snappier key registration (default 5ms) */
-#define DEBOUNCE 3
+#define DEBOUNCE 5
 
 /* Detent-position-based encoder triggering: fire exactly one event when
  * the roller settles into its resting state (both pins HIGH via pull-ups
